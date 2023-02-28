@@ -34,7 +34,7 @@ export async function insertJogo(req, res) {
     };
     openDb().then((db) => {
       db.run(
-        'INSERT INTO jogos (id, nome, ano, genero) VALUES (?,?, ?, ?)',
+        'INSERT INTO jogos (id, nome, ano, genero) VALUES (?, ?, ?, ?)',
         [jogo.id, jogo.nome, jogo.ano, jogo.genero]
       );
     });
@@ -45,60 +45,60 @@ export async function insertJogo(req, res) {
   
 
 
-export async function updateJogo(req, res){
-    let jogo = req.body;
-    openDb().then(db=>{
-        db.run("UPDATE jogos SET nome = ?, ano = ?, genero = ? WHERE id = ?", [jogo.nome, jogo.ano, jogo.genero, jogo.id])
-    })
-    res.json({
-        "statusCode":"200"
-    })
-}
+// export async function updateJogo(req, res){
+//     let jogo = req.body;
+//     openDb().then(db=>{
+//         db.run("UPDATE jogos SET nome = ?, ano = ?, genero = ? WHERE id = ?", [jogo.nome, jogo.ano, jogo.genero, jogo.id])
+//     })
+//     res.json({
+//         "statusCode":"200"
+//     })
+// }
 
-// export async function updateJogo(req, res) {
-//     const nome = req.body.nome;
-//     const ano = req.body.ano;
-//     const genero = req.body.genero;
-//     const id = req.params.id;
-//     const result = req.params.id;
+export async function updateJogo(req, res) {
+    const nome = req.body.nome;
+    const ano = req.body.ano;
+    const genero = req.body.genero;
+    const id = req.params.id;
+   
+    const result = req.params.id;
+    if(result.erro){
+      res.status(500).send('Erro ao atualizar o jogo');
+    }
+    res.send({
+      Msg: 'Jogo alterado com sucesso'
+    });
+    openDb().then((db) => {
+      db.run(
+        'UPDATE jogos SET nome = ?, ano = ?, genero = ? WHERE id = ?',
+        [nome, ano, genero, id],
+      );
+    });
+  }
 
-//     if (result.erro){
-//       res.status(500).send('Erro ao atualizar o jogo');
-//     }
-//     res.send({
-//       "Msg": 'Jogo alterado com sucesso'
-//     });
-//     openDb().then((db) => {
-//       db.run(
-//         'UPDATE jogos SET nome = ?, ano = ?, genero = ? WHERE id = ?',
-//         [nome, ano, genero, id],
-//       );
-//     });
-//   }
-
- export async function deleteJogo(req, res){
-    let id = req.body.id;
-     openDb().then(db=>{
-         db.get("DELETE FROM jogos WHERE id = ?", [id])
-        .then(res=>res)
-     })
-     res.json({
-        "statusCode":"200"
-    })
- }
+//  export async function deleteJogo(req, res){
+//     let id = req.body.id;
+//      openDb().then(db=>{
+//          db.get("DELETE FROM jogos WHERE id = ?", [id])
+//         .then(res=>res)
+//      })
+//      res.json({
+//         "statusCode":"200"
+//     })
+//  }
 
 
-// export async function deleteJogo(req, res) {
-//     const id = req.params.id;
-//     if (id.erro){
-//       res.status(500).send('Erro ao deletar o Jogo');
-//     }
+export async function deleteJogo(req, res) {
+    const id = req.params.id;
+    if (id.erro){
+      res.status(500).send('Erro ao deletar o Jogo');
+    }
   
-//     res.send({ 
-//       "Msg": 'Jogo removido com sucesso'
-//      });
+    res.send({ 
+      "Msg": 'Jogo removido com sucesso'
+     });
   
-//     openDb().then((db) => {
-//       db.run('DELETE FROM jogos WHERE id = ?', [id]);
-//     });
-//   }
+    openDb().then((db) => {
+      db.run('DELETE FROM jogos WHERE id = ?', [id]);
+    });
+  }

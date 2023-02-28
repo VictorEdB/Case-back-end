@@ -17,7 +17,7 @@ app.use(router);
 app.listen(3001, ()=>console.log("api rodando"))
 
 https.createServer({
-    cert: fs.readFileSync('src/SSl/code.crt'),
-    key: fs.readFileSync('src/SSl/code.key')
+    cert: fs.readFileSync('src/SSL/code.crt'),
+    key: fs.readFileSync('src/SSL/code.key')
 }, app)
 .listen(3000, () => console.log("Rodando em https"))

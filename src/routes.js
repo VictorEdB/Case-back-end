@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 router.get('/jogos', selectJogos);
 router.get('/jogo', selectJogo);
 router.post('/jogo', insertJogo);
-router.put('/jogo', updateJogo);
-router.delete('/jogo', deleteJogo);
+router.put('/jogo/:id', updateJogo);
+router.delete('/jogo/:id', deleteJogo);
 
 export default router;
