@@ -2,7 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import https from 'https';
 import cors from 'cors';
-import { createTableJogos } from './Models/createjogos.js';
+import { createTableJogos } from './Models/createJogos.js';
 import router from './routes.js';
 
 const app = express();
